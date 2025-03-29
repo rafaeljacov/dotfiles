@@ -5,10 +5,8 @@ return {
     },
     config = function()
         vim.o.timeout = true
-        vim.o.timeoutlen = 400
+        vim.o.timeoutlen = 500
         require('mini.icons').setup()
-        require('which-key').setup({
-            preset = "helix"
-        })
+        require('which-key').setup()
     end
 }

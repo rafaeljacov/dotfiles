@@ -8,13 +8,8 @@ return {
             local lspconfig = require('lspconfig')
 
             -- Language Servers: (for Rust, see "plugins.rustaceanvim")
-            -- mason-lspconfig
             local gopls = require("plugins.lsp.gopls")
-            local htmx = require("plugins.lsp.htmx")
-            local html = require("plugins.lsp.html")
-            local emmet = require("plugins.lsp.emmet")
-            -- lspconfig
-            local nixd = require("plugins.lsp.nixd")
+            local tailwindcss = require("plugins.lsp.tailwindcss")
 
             -- add cmp_nvim_lsp capabilities settings to lspconfig
             -- this should be executed before you configure any language server
@@ -24,12 +19,6 @@ return {
                 lspconfig_defaults.capabilities,
                 require('cmp_nvim_lsp').default_capabilities()
             )
-
-            -- Setup lsp using lspconfig
-            lspconfig['lua_ls'].setup({}) -- use system installed lua_ls package for NixOS compat
-            lspconfig.nixd.setup(nixd)
-
-            -- Setup lsp using mason-lspconfig
             require('mason').setup({})
             require('mason-lspconfig').setup({
                 automatic_installation = false,
@@ -38,34 +27,26 @@ return {
                     'ts_ls',
                     'emmet_ls',
                     'html',
-                    'htmx',
+                    -- 'htmx', not compatible
                     'eslint',
-                    'clangd',
+                    -- 'clangd', use termux pkg instead
                     'templ',
                     'tailwindcss',
                     'gopls',
                     'pyright',
                     'bashls',
-                    'tinymist',
+                    -- 'lua_ls', use termux pkg instead
                     'marksman'
                 },
                 handlers = {
                     function(server_name)
                         lspconfig[server_name].setup({})
                     end,
-                    lua_ls = function()
-                    end,
-                    html = function()
-                        lspconfig.html.setup(html)
-                    end,
-                    emmet_ls = function()
-                        lspconfig.emmet_ls.setup(emmet)
-                    end,
                     gopls = function()
                         lspconfig.gopls.setup(gopls)
                     end,
-                    htmx = function()
-                        lspconfig.htmx.setup(htmx)
+                    tailwindcss = function()
+                        lspconfig.tailwindcss.setup(tailwindcss)
                     end,
                 },
             })
