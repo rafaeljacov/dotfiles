@@ -8,13 +8,10 @@ return {
             local lspconfig = require('lspconfig')
 
             -- Language Servers: (for Rust, see "plugins.rustaceanvim")
-            -- mason-lspconfig
             local gopls = require("plugins.lsp.gopls")
             local htmx = require("plugins.lsp.htmx")
             local html = require("plugins.lsp.html")
             local emmet = require("plugins.lsp.emmet")
-            -- lspconfig
-            local nixd = require("plugins.lsp.nixd")
 
             -- add cmp_nvim_lsp capabilities settings to lspconfig
             -- this should be executed before you configure any language server
@@ -24,12 +21,6 @@ return {
                 lspconfig_defaults.capabilities,
                 require('cmp_nvim_lsp').default_capabilities()
             )
-
-            -- Setup lsp using lspconfig
-            lspconfig['lua_ls'].setup({}) -- use system installed lua_ls package for NixOS compat
-            lspconfig.nixd.setup(nixd)
-
-            -- Setup lsp using mason-lspconfig
             require('mason').setup({})
             require('mason-lspconfig').setup({
                 automatic_installation = false,
@@ -46,14 +37,13 @@ return {
                     'gopls',
                     'pyright',
                     'bashls',
+                    'lua_ls',
                     'tinymist',
                     'marksman'
                 },
                 handlers = {
                     function(server_name)
                         lspconfig[server_name].setup({})
-                    end,
-                    lua_ls = function()
                     end,
                     html = function()
                         lspconfig.html.setup(html)

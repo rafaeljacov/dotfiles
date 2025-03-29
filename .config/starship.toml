@@ -8,39 +8,32 @@ add_newline = false
 # Random noise 🬖🬥🬔🬗
 
 format = """
-$directory $nix_shell$git_branch$git_commit$git_status$git_state\
-$fill \
+$directory $git_branch\
 $python\
 $c\
 $rust\
 $java\
 $golang\
-$lua 
+$lua
 $character
 """
 
 [fill]
 symbol = ' '
 
+# Replace the "❯" symbol in the prompt with "➜"
 [character]
 success_symbol = "[❯](bold fg:green) "
 error_symbol = "[❯](bold fg:red) "
 
-[nix_shell]
-format = '[$symbol(\($state$name\))]($style) '
-symbol = '[ ](#88c8fc)' # there is a flake symbol inside. try to highlight using mouse
-pure_msg = '[ ](subtext0)'
-impure_msg = '[ ](subtext0)'
-
 [git_branch]
-format = "on [$symbol $branch(:$remote_branch)](fg:teal) "
 style = "bg: green"
-symbol = "[󰘬](text)"
-truncation_length = 6
-truncation_symbol = ".."
+symbol = "󰘬"
+truncation_length = 4
+truncation_symbol = ""
+format = "on [$symbol $branch(:$remote_branch) ](fg:teal)"
 
 [git_commit]
-format = '[\($hash$tag\)]($style) '
 commit_hash_length = 4
 tag_symbol = " "
 
@@ -49,14 +42,16 @@ format = '[\($state( $progress_current of $progress_total)\)]($style) '
 cherry_pick = "[🍒 PICKING](bold red)"
 
 [git_status]
-format = '[$all_status$ahead_behind]($style) '
-conflicted = '󰘭'
-ahead = '[](sky)'
-behind = '[](red)'
-stashed = "[ ](subtext0)"
-modified = '[ ](red)'
-staged = '[ ](green)'
-diverged = '[󰹺](yellow)'
+conflicted = " 🏳 "
+ahead = " 🏎💨 "
+behind = " 😰 "
+diverged = " 😵 "
+untracked = " 🤷 "
+stashed = " 📦 "
+modified = " 📝 "
+staged = '[++\($count\)](green)'
+renamed = " ✍️ "
+deleted = " 🗑 "
 
 [line_break]
 disabled = false
