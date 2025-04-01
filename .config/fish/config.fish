@@ -1,7 +1,6 @@
 set -g fish_greeting
 
 abbr vim nvim
-abbr update sudo emerge --ask --update --changed-use --deep @world
 abbr ino arduino-cli
 abbr z zellij
 
