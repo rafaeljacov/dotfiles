@@ -27,6 +27,7 @@ return {
 
             -- Setup lsp using lspconfig
             lspconfig['lua_ls'].setup({}) -- use system installed lua_ls package for NixOS compat
+            lspconfig.clangd.setup({})
             lspconfig.nixd.setup(nixd)
 
             -- Setup lsp using mason-lspconfig
