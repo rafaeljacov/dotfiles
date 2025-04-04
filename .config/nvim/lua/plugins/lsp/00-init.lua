@@ -40,7 +40,6 @@ return {
                     'html',
                     'htmx',
                     'eslint',
-                    'clangd',
                     'templ',
                     'tailwindcss',
                     'gopls',

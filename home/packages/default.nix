@@ -11,6 +11,7 @@
     btop
     chafa
     ciscoPacketTracer8
+    clang-tools
     deno
     devenv
     eza
