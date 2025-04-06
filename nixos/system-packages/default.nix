@@ -10,6 +10,7 @@
     gnumake
     go
     gparted
+    hyprsunset
     kitty
     lsof
     lxqt.lxqt-policykit
