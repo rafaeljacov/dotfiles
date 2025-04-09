@@ -16,6 +16,7 @@
     lxqt.lxqt-policykit
     microsoft-edge
     pavucontrol
+    postgresql
     python3
     unzip
     usbutils
