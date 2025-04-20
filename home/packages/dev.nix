@@ -21,5 +21,6 @@ with pkgs; [
 
   # Rust
   rustup
+  rust-analyzer
   cargo-generate
 ]

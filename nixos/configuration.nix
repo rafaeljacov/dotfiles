@@ -7,22 +7,13 @@
   inputs,
   ...
 }: {
-  imports = let
-    aagl-gtk-on-nix = import (builtins.fetchTarball {
-      url = "https://github.com/ezKEa/aagl-gtk-on-nix/archive/main.tar.gz";
-      sha256 = "04pnhbwxr14019h9lp3wx0z1j45ghzzbrjjy683qyw5xj195fskd";
-    });
-  in [
+  imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
     # System Packages
     ./system-packages
-
-    # Anime game launcher
-    aagl-gtk-on-nix.module
   ];
-  programs.anime-game-launcher.enable = true;
 
   # as needed by devenv
   nix.settings.trusted-users = ["root" "rafaeljacov"];
@@ -98,7 +89,14 @@
   users.users.rafaeljacov = {
     isNormalUser = true;
     description = "Rafael Jacov Medel";
-    extraGroups = ["networkmanager" "storage" "audio" "wheel" "docker"];
+    extraGroups = [
+        "audio"
+        "dialout"
+        "docker"
+        "networkmanager"
+        "storage"
+        "wheel"
+    ];
   };
 
   # Allow unfree packages
