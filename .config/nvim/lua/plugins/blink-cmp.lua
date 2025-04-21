@@ -10,8 +10,6 @@ return {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-        keymap = { preset = 'default' },
-
         appearance = {
             nerd_font_variant = 'mono'
         },
@@ -26,11 +24,19 @@ return {
                 dadbod = { module = "vim_dadbod_completion.blink" },
                 lazydev = {
                     name = "LazyDev",
-                   module = "lazydev.integrations.blink",
-                   -- make lazydev completions top priority (see `:h blink.cmp`)
-                   score_offset = 100,
+                    module = "lazydev.integrations.blink",
+                    -- make lazydev completions top priority (see `:h blink.cmp`)
+                    score_offset = 100,
                 },
             }
+        },
+
+        keymap = {
+            preset = 'default',
+            ['<C-e>'] = { 'cancel' },
+
+            ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
+            ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
         },
 
         completion = {
