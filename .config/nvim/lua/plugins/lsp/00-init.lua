@@ -16,13 +16,13 @@ return {
             -- lspconfig
             local nixd = require("plugins.lsp.nixd")
 
-            -- add cmp_nvim_lsp capabilities settings to lspconfig
+            -- add blink.cmp capabilities settings to lspconfig
             -- this should be executed before you configure any language server
             local lspconfig_defaults = lspconfig.util.default_config
             lspconfig_defaults.capabilities = vim.tbl_deep_extend(
                 'force',
                 lspconfig_defaults.capabilities,
-                require('cmp_nvim_lsp').default_capabilities()
+                require('blink.cmp').get_lsp_capabilities()
             )
 
             -- Setup lsp using lspconfig

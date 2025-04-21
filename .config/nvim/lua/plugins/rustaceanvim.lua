@@ -25,7 +25,6 @@ return {
             },
             -- LSP configuration
             server = {
-                capabilities = require('cmp_nvim_lsp').default_capabilities(),
                 default_settings = {
                     -- rust-analyzer language server configuration
                     ["rust-analyzer"] = {
