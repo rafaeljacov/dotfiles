@@ -10,8 +10,6 @@ return {
             -- Language Servers: (for Rust, see "plugins.rustaceanvim")
             -- mason-lspconfig
             local gopls = require("plugins.lsp.gopls")
-            local htmx = require("plugins.lsp.htmx")
-            local html = require("plugins.lsp.html")
             local emmet = require("plugins.lsp.emmet")
             -- lspconfig
             local nixd = require("plugins.lsp.nixd")
@@ -56,7 +54,7 @@ return {
                     lua_ls = function()
                     end,
                     html = function()
-                        lspconfig.html.setup(html)
+                        lspconfig.html.setup({ filetypes = { 'html', 'templ' } })
                     end,
                     emmet_ls = function()
                         lspconfig.emmet_ls.setup(emmet)
@@ -65,7 +63,7 @@ return {
                         lspconfig.gopls.setup(gopls)
                     end,
                     htmx = function()
-                        lspconfig.htmx.setup(htmx)
+                        lspconfig.htmx.setup({ filetypes = { 'html', 'templ' } })
                     end,
                 },
             })
