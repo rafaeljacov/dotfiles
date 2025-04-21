@@ -8,6 +8,7 @@
     gcc
     git
     gnumake
+    go
     gparted
     hyprsunset
     kitty

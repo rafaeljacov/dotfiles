@@ -14,7 +14,6 @@ with pkgs; [
   typstyle
 
   # Go
-  go
   gofumpt
   golangci-lint
   gotools
