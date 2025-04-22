@@ -14,7 +14,6 @@ with pkgs; [
   nixd
   nodePackages.prettier
   nodejs_23
-  postgresql
   python3
   sqlfluff
   typst
