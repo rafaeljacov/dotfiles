@@ -7,13 +7,6 @@ return {
         config = function()
             local lspconfig = require('lspconfig')
 
-            -- Language Servers: (for Rust, see "plugins.rustaceanvim")
-            -- mason-lspconfig
-            local gopls = require("plugins.lsp.gopls")
-            local emmet = require("plugins.lsp.emmet")
-            -- lspconfig
-            local nixd = require("plugins.lsp.nixd")
-
             -- add blink.cmp capabilities settings to lspconfig
             -- this should be executed before you configure any language server
             local lspconfig_defaults = lspconfig.util.default_config
@@ -23,8 +16,13 @@ return {
                 require('blink.cmp').get_lsp_capabilities()
             )
 
-            -- Setup lsp using lspconfig
-            lspconfig['lua_ls'].setup({}) -- use system installed lua_ls package for NixOS compat
+            -- Language Servers: (for Rust, see "plugins.rustaceanvim")
+            local gopls = require("plugins.lsp.gopls")
+            local emmet = require("plugins.lsp.emmet")
+            local nixd = require("plugins.lsp.nixd")
+
+            -- Setup lsp's using lspconfig
+            lspconfig.lua_ls.setup({}) -- use system installed lua_ls package for NixOS compat
             lspconfig.clangd.setup({})
             lspconfig.nixd.setup(nixd)
 
