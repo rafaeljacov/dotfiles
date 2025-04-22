@@ -5,10 +5,6 @@
     evince
     ffmpegthumbnailer
     file-roller
-    gcc
-    git
-    gnumake
-    go
     gparted
     hyprsunset
     kitty
@@ -16,8 +12,6 @@
     lxqt.lxqt-policykit
     microsoft-edge
     pavucontrol
-    postgresql
-    python3
     unzip
     usbutils
     vim
@@ -30,7 +24,6 @@
     xfce.thunar-media-tags-plugin
     xfce.thunar-volman
     xfce.tumbler
-    zellij
     zip
   ];
 }
