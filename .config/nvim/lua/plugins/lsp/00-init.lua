@@ -33,19 +33,19 @@ return {
             require('mason-lspconfig').setup({
                 automatic_installation = false,
                 ensure_installed = {
+                    'bashls',
                     'cssls',
-                    'ts_ls',
                     'emmet_ls',
+                    'eslint',
+                    'gopls',
                     'html',
                     'htmx',
-                    'eslint',
-                    'templ',
-                    'tailwindcss',
-                    'gopls',
+                    'marksman',
                     'pyright',
-                    'bashls',
+                    'tailwindcss',
+                    'templ',
                     'tinymist',
-                    'marksman'
+                    'ts_ls',
                 },
                 handlers = {
                     function(server_name)
