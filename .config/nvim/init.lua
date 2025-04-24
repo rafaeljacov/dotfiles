@@ -61,4 +61,4 @@ if vim.g.neovide then
 end
 
 -- Colorscheme
-vim.cmd.colorscheme "catppuccin-macchiato"
+vim.cmd.colorscheme 'kanagawa'
