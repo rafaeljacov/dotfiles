@@ -15,6 +15,7 @@
     grim
     inputs.zen-browser.packages.${system}.beta
     krabby
+    nix-your-shell
     protonup
     ripgrep
     slurp
