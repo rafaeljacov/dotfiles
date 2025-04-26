@@ -25,6 +25,9 @@
     videos = "${HOME}/Videos";
   };
 
+  # This fixes env vars declared in home.sessionVariables somehow not being set
+  programs.bash.enable = true;
+
   home.sessionVariables = let
     HOME = config.home.homeDirectory;
     editor = "nvim";
@@ -37,19 +40,6 @@
   };
 
   home.stateVersion = "24.11"; # match your system.stateVersion
-
-  programs.bash = {
-    enable = true;
-
-    # Use fish as shell through bash
-    initExtra = ''
-      if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
-      then
-        shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-      fi
-    '';
-  };
 
   programs.git = {
     enable = true;

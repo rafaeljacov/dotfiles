@@ -66,6 +66,17 @@
     variant = "";
   };
 
+  programs.bash = {
+    # Use fish as shell through bash
+    interactiveShellInit = ''
+      if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+      then
+        shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+      fi
+    '';
+  };
+
   # Fish
   programs.fish.enable = true;
 
@@ -90,12 +101,12 @@
     isNormalUser = true;
     description = "Rafael Jacov Medel";
     extraGroups = [
-        "audio"
-        "dialout"
-        "docker"
-        "networkmanager"
-        "storage"
-        "wheel"
+      "audio"
+      "dialout"
+      "docker"
+      "networkmanager"
+      "storage"
+      "wheel"
     ];
   };
 
