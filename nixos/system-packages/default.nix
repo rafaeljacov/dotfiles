@@ -2,6 +2,7 @@
   environment.systemPackages = with pkgs; [
     alsa-utils
     brightnessctl
+    cronie
     evince
     ffmpegthumbnailer
     file-roller
