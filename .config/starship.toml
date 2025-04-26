@@ -28,7 +28,7 @@ error_symbol = "[❯](bold fg:red) "
 
 [nix_shell]
 format = '[$symbol(\($state$name\))]($style) '
-symbol = '[ ](#88c8fc)' # there is a flake symbol inside. try to highlight using mouse
+symbol = '[ ](#88c8fc)'
 pure_msg = '[ ](subtext0)'
 impure_msg = '[ ](subtext0)'
 
