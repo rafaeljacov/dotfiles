@@ -8,6 +8,9 @@ config.font = wezterm.font(
     { weight = 'Bold' }
 )
 
-config.color_scheme = 'Kanagawa Dragon (Gogh)'
+config.color_scheme = 'Kanagawa (Gogh)'
+config.colors = {
+    background = '#0a0a0a',
+}
 
 return config
