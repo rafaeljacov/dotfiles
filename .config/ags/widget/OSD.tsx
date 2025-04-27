@@ -1,39 +1,37 @@
-import { App, Astal, Gdk, Gtk } from "astal/gtk3"
-import { timeout } from "astal/time"
-import Variable from "astal/variable"
-import Brightness from "../lib/brightness"
-import Wp from "gi://AstalWp"
+import { App, Astal, Gdk, Gtk } from "astal/gtk3";
+import { timeout } from "astal/time";
+import Variable from "astal/variable";
+import Brightness from "../lib/brightness";
+import Wp from "gi://AstalWp";
 
 function OnScreenProgress({ visible }: { visible: Variable<boolean> }) {
-    const brightness = Brightness.get_default()
-    const speaker = Wp.get_default()!.get_default_speaker()
+    const brightness = Brightness.get_default();
+    const speaker = Wp.get_default()!.get_default_speaker();
 
-    const iconName = Variable("")
-    const value = Variable(0)
+    const iconName = Variable("");
+    const value = Variable(0);
 
-    let count = 0
+    let count = 0;
     function show(v: number, icon: string) {
-        visible.set(true)
-        value.set(v)
-        iconName.set(icon)
-        count++
+        visible.set(true);
+        value.set(v);
+        iconName.set(icon);
+        count++;
         timeout(1000, () => {
-            count--
-            if (count === 0) visible.set(false)
-        })
+            count--;
+            if (count === 0) visible.set(false);
+        });
     }
 
     return (
         <revealer
             setup={(self) => {
                 self.hook(brightness, "notify::screen", () =>
-                    show(brightness.screen, "display-brightness-symbolic"),
-                )
+                    show(brightness.screen, "display-brightness-symbolic"));
 
                 if (speaker) {
                     self.hook(speaker, "notify::volume", () =>
-                        show(speaker.volume, speaker.volumeIcon),
-                    )
+                        show(speaker.volume, speaker.volumeIcon));
                 }
             }}
             revealChild={visible()}
@@ -41,15 +39,23 @@ function OnScreenProgress({ visible }: { visible: Variable<boolean> }) {
         >
             <box className="OSD">
                 <icon icon={iconName()} />
-                <levelbar valign={Gtk.Align.CENTER} widthRequest={125} value={value()} />
-                <label label={value(v => `${Math.floor(v * 100)}%`)} />
+                <levelbar
+                    valign={Gtk.Align.CENTER}
+                    widthRequest={125}
+                    value={value()}
+                />
+                <label
+                    label={value((v) =>
+                        `${Math.floor(v * 100)}%`
+                    )}
+                />
             </box>
         </revealer>
-    )
+    );
 }
 
 export default function OSD(monitor: Gdk.Monitor) {
-    const visible = Variable(false)
+    const visible = Variable(false);
 
     return (
         <window
@@ -65,5 +71,5 @@ export default function OSD(monitor: Gdk.Monitor) {
                 <OnScreenProgress visible={visible} />
             </eventbox>
         </window>
-    )
+    );
 }

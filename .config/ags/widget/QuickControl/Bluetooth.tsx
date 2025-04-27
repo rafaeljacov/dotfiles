@@ -1,3 +1,4 @@
-import { exec } from "astal/process"
+import { exec } from "astal/process";
 
-export const bluetooth_blocked = () => exec('rfkill list bluetooth').includes('yes')
+export const bluetooth_blocked = () =>
+    exec("rfkill list bluetooth").includes("yes");

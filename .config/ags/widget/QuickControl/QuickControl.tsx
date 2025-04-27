@@ -1,16 +1,16 @@
-import { Binding, Variable, bind } from "astal";
-import { App, Gdk, Astal, Gtk } from "astal/gtk3";
+import { bind, Binding, Variable } from "astal";
+import { App, Astal, Gdk, Gtk } from "astal/gtk3";
 import { Button, Slider } from "astal/gtk3/widget";
 import GLib from "gi://GLib";
 import Wp from "gi://AstalWp";
 import Brightness from "../../lib/brightness";
 import Network from "gi://AstalNetwork";
 import Bluetooth from "gi://AstalBluetooth";
-import { bluetooth_blocked } from './Bluetooth'
+import { bluetooth_blocked } from "./Bluetooth";
 import { exec, execAsync } from "astal/process";
 import MprisPlayers from "./MediaPlayer";
-import WifiExpanded from './WifiExpanded'
-import { truncate } from "../../lib/utils"
+import WifiExpanded from "./WifiExpanded";
+import { truncate } from "../../lib/utils";
 
 type ControlBtnProps = {
     className?: string;
@@ -31,16 +31,16 @@ type SliderEntryProps = {
 type ExpandProps = {
     toggle: Binding<boolean>;
     child?: JSX.Element;
-}
+};
 
 enum Expander {
     WIFI,
     BT,
-    NONE
+    NONE,
 }
 
-let toggle_expand = Variable(false)
-let expander = Variable(Expander.NONE)
+let toggle_expand = Variable(false);
+let expander = Variable(Expander.NONE);
 
 export default function QuickControl() {
     return (
@@ -58,11 +58,13 @@ export default function QuickControl() {
                 }
             }}
         >
-            <eventbox onHoverLost={() => {
-                expander.set(Expander.NONE)
-                toggle_expand.set(false)
-                App.get_window('quick_control')?.hide()
-            }}>
+            <eventbox
+                onHoverLost={() => {
+                    expander.set(Expander.NONE);
+                    toggle_expand.set(false);
+                    App.get_window("quick_control")?.hide();
+                }}
+            >
                 <box className="QuickControl" vertical>
                     <Session />
                     <Sliders />
@@ -141,11 +143,11 @@ function Session() {
                 </box>
             </box>
             <box className="PowerControls" halign={Gtk.Align.END}>
-                <PowerControlBtn icon="lock" callback={() => { }} />
+                <PowerControlBtn icon="lock" callback={() => {}} />
                 <PowerControlBtn
                     icon="system-shutdown-symbolic"
                     callback={() => {
-                        exec("poweroff")
+                        exec("poweroff");
                     }}
                 />
             </box>
@@ -178,7 +180,7 @@ function Aside() {
             <button
                 vexpand
                 className="sound-setting"
-                cursor='pointer'
+                cursor="pointer"
                 onClicked={() => {
                     execAsync("pavucontrol");
                     App.toggle_window("quick_control");
@@ -189,8 +191,9 @@ function Aside() {
             <button
                 vexpand
                 className="warm-light-toggle"
-                cursor='pointer'
-                onClicked={() => exec(["hyprshade", "toggle", "blue-light-filter"])}
+                cursor="pointer"
+                onClicked={() =>
+                    exec(["hyprshade", "toggle", "blue-light-filter"])}
             >
                 <icon icon={warm_light_mode()} />
             </button>
@@ -202,13 +205,12 @@ function SliderEntry({ icon, value, onclick, callback }: SliderEntryProps) {
     return (
         <box className="SliderEntry">
             {(onclick !== undefined)
-                ? // if
-                <button onClicked={onclick} cursor='pointer'>
+                // if
+                ? <button onClicked={onclick} cursor="pointer">
                     <icon valign={Gtk.Align.CENTER} icon={icon} />
                 </button>
-                : // else
-                <icon valign={Gtk.Align.CENTER} icon={icon} />
-            }
+                // else
+                : <icon valign={Gtk.Align.CENTER} icon={icon} />}
             <slider value={value} hexpand onDragged={callback} />
         </box>
     );
@@ -217,9 +219,11 @@ function SliderEntry({ icon, value, onclick, callback }: SliderEntryProps) {
 function Sliders() {
     const speaker = Wp.get_default()?.audio.default_speaker!;
     const brightness = Brightness.get_default();
-    const THRESHOLD = 0.4
+    const THRESHOLD = 0.4;
 
-    let brightness_icon = bind(brightness, 'screen').as(v => (v <= THRESHOLD) ? 'moon' : 'sun');
+    let brightness_icon = bind(brightness, "screen").as((v) =>
+        (v <= THRESHOLD) ? "moon" : "sun"
+    );
     return (
         <box className="Sliders">
             <box vertical>
@@ -251,13 +255,13 @@ function ControlBtn({
     const LABEL_MAX_LENGTH = 12;
     const button_setup = (self: Button) => {
         if (active) {
-            self.toggleClassName('active', active.get())
-            self.toggleClassName('has-expand', expand !== undefined)
+            self.toggleClassName("active", active.get());
+            self.toggleClassName("has-expand", expand !== undefined);
             self.hook(active, () => {
-                self.toggleClassName('active', active.get())
-            })
+                self.toggleClassName("active", active.get());
+            });
         }
-    }
+    };
 
     let lb;
     if (typeof label == "string") {
@@ -284,7 +288,7 @@ function ControlBtn({
                     onClicked={expand}
                     halign={Gtk.Align.END}
                     setup={button_setup}
-                    cursor='pointer'
+                    cursor="pointer"
                 >
                     <icon icon="caret-right" />
                 </button>
@@ -294,33 +298,35 @@ function ControlBtn({
 }
 
 function MainControls() {
-
     const network = Network.get_default();
-    const wifi = network.wifi
+    const wifi = network.wifi;
 
-    const mic = Wp.get_default()?.audio.default_microphone!
+    const mic = Wp.get_default()?.audio.default_microphone!;
 
     const bluetooth = Bluetooth.get_default();
-    const bt_adapter = bluetooth.get_adapter()
+    const bt_adapter = bluetooth.get_adapter();
 
-    const [DISABLED, DISCONNECTED, CONNECTING] = ['Disabled', 'Disconnected', 'Connecting...']
+    const [DISABLED, DISCONNECTED, CONNECTING] = [
+        "Disabled",
+        "Disconnected",
+        "Connecting...",
+    ];
     const wifi_label = Variable.derive([
-        bind(wifi, 'enabled'),
-        bind(network, 'state'),
-        bind(wifi, 'state'),
-        bind(wifi, 'ssid'),
-    ],
-        (enabled, net_state, wifi_state, ssid) => {
-            if (!enabled) {
-                return DISABLED
-            } else if (wifi_state === Network.DeviceState.DISCONNECTED) {
-                return DISCONNECTED
-            } else if (net_state === Network.State.CONNECTING) {
-                return CONNECTING
-            }
+        bind(wifi, "enabled"),
+        bind(network, "state"),
+        bind(wifi, "state"),
+        bind(wifi, "ssid"),
+    ], (enabled, net_state, wifi_state, ssid) => {
+        if (!enabled) {
+            return DISABLED;
+        } else if (wifi_state === Network.DeviceState.DISCONNECTED) {
+            return DISCONNECTED;
+        } else if (net_state === Network.State.CONNECTING) {
+            return CONNECTING;
+        }
 
-            return ssid !== null ? ssid : DISCONNECTED
-        })
+        return ssid !== null ? ssid : DISCONNECTED;
+    });
 
     return (
         <box className="MainControls" vertical>
@@ -328,51 +334,57 @@ function MainControls() {
                 <ControlBtn
                     icon={bind(wifi, "icon_name")}
                     label={wifi_label()}
-                    active={bind(wifi, 'enabled')}
+                    active={bind(wifi, "enabled")}
                     callback={() => wifi.set_enabled(!wifi.get_enabled())}
                     expand={() => {
                         if (expander.get() == Expander.WIFI) {
-                            expander.set(Expander.NONE)
-                            toggle_expand.set(false)
+                            expander.set(Expander.NONE);
+                            toggle_expand.set(false);
                         } else {
-                            expander.set(Expander.WIFI)
-                            toggle_expand.set(true)
+                            expander.set(Expander.WIFI);
+                            toggle_expand.set(true);
                         }
                     }}
                 />
                 <ControlBtn
                     icon="bluetooth"
-                    label={'Bluetooth'}
-                    active={bind(bluetooth, 'is_powered')}
+                    label={"Bluetooth"}
+                    active={bind(bluetooth, "is_powered")}
                     callback={() => {
                         if (bluetooth_blocked()) {
-                            exec('rfkill unblock bluetooth')
+                            exec("rfkill unblock bluetooth");
                         }
 
-                        return bt_adapter?.set_powered(!bt_adapter.get_powered())
+                        return bt_adapter?.set_powered(
+                            !bt_adapter.get_powered(),
+                        );
                     }}
                     expand={() => {
                         if (expander.get() == Expander.BT) {
-                            expander.set(Expander.NONE)
-                            toggle_expand.set(false)
+                            expander.set(Expander.NONE);
+                            toggle_expand.set(false);
                         } else {
-                            expander.set(Expander.BT)
-                            toggle_expand.set(true)
+                            expander.set(Expander.BT);
+                            toggle_expand.set(true);
                         }
                     }}
                 />
             </box>
             <Expand toggle={toggle_expand()}>
                 <WifiExpanded
-                    inview={bind(expander).as(e => (e == Expander.WIFI))}
+                    inview={bind(expander).as((e) => (e == Expander.WIFI))}
                 />
             </Expand>
             <box className="entry">
                 <ControlBtn
-                    className='mic'
-                    icon={bind(mic, 'mute').as(muted => muted ? 'mic-muted' : 'mic')}
-                    label={bind(mic, 'mute').as(muted => muted ? 'Muted' : 'Unmuted')}
-                    active={bind(mic, 'mute')}
+                    className="mic"
+                    icon={bind(mic, "mute").as((muted) =>
+                        muted ? "mic-muted" : "mic"
+                    )}
+                    label={bind(mic, "mute").as((muted) =>
+                        muted ? "Muted" : "Unmuted"
+                    )}
+                    active={bind(mic, "mute")}
                     callback={() => mic.set_mute(!mic.get_mute())}
                 />
                 <ControlBtn icon="x" label="Option" />
@@ -382,12 +394,17 @@ function MainControls() {
 }
 
 function Expand({ toggle, child }: ExpandProps) {
-
-    return <revealer
-        className="Expand"
-        setup={self => self.hook(toggle, (self) => self.set_reveal_child(toggle.get()))}
-        transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
-    >
-        {child}
-    </revealer>
+    return (
+        <revealer
+            className="Expand"
+            setup={(self) =>
+                self.hook(
+                    toggle,
+                    (self) => self.set_reveal_child(toggle.get()),
+                )}
+            transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
+        >
+            {child}
+        </revealer>
+    );
 }

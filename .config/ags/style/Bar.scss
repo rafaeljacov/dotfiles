@@ -1,8 +1,8 @@
 @use "sass:color";
 
-$bg_color: #{ "@theme_bg_color" };
+$bg_color: #{"@theme_bg_color"};
 $fg: #f1f1f1;
-$accent: #378DF7;
+$accent: #378df7;
 $radius: 7px;
 
 window.Bar {
@@ -40,10 +40,9 @@ window.Bar {
         }
 
         &:active label {
-            background-color: color.adjust($fg, $alpha: -0.8)
+            background-color: color.adjust($fg, $alpha: -0.8);
         }
     }
-
 
     label {
         transition: 200ms;
