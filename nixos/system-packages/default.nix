@@ -8,14 +8,17 @@
     file-roller
     gparted
     hyprsunset
+    hyprsysteminfo
     kitty
     lsof
     lxqt.lxqt-policykit
     microsoft-edge
+    nixos-firewall-tool
     pavucontrol
     unzip
     usbutils
     vim
+    vlc
     wezterm
     wget
     wl-clipboard
