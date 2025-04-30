@@ -25,7 +25,6 @@
     teams-for-linux
     tldr
     udiskie
-    watchman
     webcord
     yazi
     zoxide
