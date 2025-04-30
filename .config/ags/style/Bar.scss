@@ -17,7 +17,7 @@ window.Bar {
         all: unset;
         background-color: transparent;
 
-        &:hover label {
+        :not(.tray-btn) &:hover label {
             background-color: color.adjust($fg, $alpha: -0.84);
             border-color: color.adjust($accent, $alpha: -0.8);
         }
@@ -57,8 +57,12 @@ window.Bar {
         border-color: $accent;
     }
 
-    .FocusedClient {
-        color: $accent;
+    .SysTray {
+        margin-right: 8px;
+
+        button {
+            padding: 0 4px;
+        }
     }
 
     .Media .Cover {

@@ -12,34 +12,17 @@ function SysTray() {
     const tray = Tray.get_default();
 
     return (
-        <box>
-            {bind(tray, "items").as((items) =>
-                items.map((item) => {
-                    if (item.iconThemePath) {
-                        App.add_icons(item.iconThemePath);
-                    }
-
-                    const menu = item.create_menu();
-
-                    return (
-                        <button
-                            css="margin-left: 7px"
-                            tooltipMarkup={bind(item, "tooltipMarkup")}
-                            onDestroy={() => menu?.destroy()}
-                            onClickRelease={(self) => {
-                                menu?.popup_at_widget(
-                                    self,
-                                    Gdk.Gravity.SOUTH,
-                                    Gdk.Gravity.NORTH,
-                                    null,
-                                );
-                            }}
-                        >
-                            <icon gIcon={bind(item, "gicon")} />
-                        </button>
-                    );
-                })
-            )}
+        <box className="SysTray">
+            {bind(tray, "items").as(items => items.map(item => (
+                <menubutton
+                    className="tray-btn"
+                    tooltipMarkup={bind(item, "tooltipMarkup")}
+                    usePopover={false}
+                    actionGroup={bind(item, "actionGroup").as(ag => ["dbusmenu", ag])}
+                    menuModel={bind(item, "menuModel")}>
+                    <icon gicon={bind(item, "gicon")} />
+                </menubutton>
+            )))}
         </box>
     );
 }
