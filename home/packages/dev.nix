@@ -13,8 +13,10 @@ with pkgs; [
   neovim
   nixd
   nodePackages.prettier
-  nodejs_23
+  nodejs_24
+  posting
   python3
+  shellcheck
   sqlfluff
   typst
   typstyle
