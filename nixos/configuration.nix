@@ -124,6 +124,7 @@
   # List services that you want to enable:
   services.upower.enable = true;
   services.gvfs.enable = true;
+  services.locate.enable = true;
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -178,7 +179,7 @@
   ];
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 8081 5000 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
