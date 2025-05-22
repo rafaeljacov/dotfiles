@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     alsa-utils
+    brave
     brightnessctl
     cronie
     evince
@@ -12,7 +13,6 @@
     kitty
     lsof
     lxqt.lxqt-policykit
-    microsoft-edge
     nixos-firewall-tool
     pavucontrol
     unzip
