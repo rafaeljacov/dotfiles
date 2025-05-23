@@ -3,6 +3,7 @@ with pkgs; [
   black
   clang-tools
   deno
+  delta
   devenv
   gcc
   git
