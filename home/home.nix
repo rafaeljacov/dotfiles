@@ -47,11 +47,19 @@
     userEmail = "medelrafjac@gmail.com";
 
     extraConfig = {
+      core = {
+        editor = "nvim";
+        pager = "delta";
+        autocrlf = "input";
+      };
+
       init.defaultBranch = "main";
-      core.editor = "nvim";
-      core.autocrlf = "input";
+      interactive.diffFilter = "delta --color-only";
+      delta.navigate = true;
+      delta.dark = true;
       alias.stats = "status -s";
       pull.ff = "only";
+      merge.conflictStyle = "zdiff3";
     };
   };
 
