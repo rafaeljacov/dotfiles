@@ -5,10 +5,13 @@ with pkgs; [
   deno
   delta
   devenv
+  fd
   gcc
   git
   gnumake
   hyprls
+  imagemagick
+  jq
   lua-language-server
   mypy
   neovim
@@ -21,6 +24,7 @@ with pkgs; [
   sqlfluff
   typst
   typstyle
+  zed-editor
   zellij
 
   # Go
