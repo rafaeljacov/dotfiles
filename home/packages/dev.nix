@@ -15,6 +15,7 @@ with pkgs; [
   lua-language-server
   mypy
   neovim
+  neovide
   nixd
   nodePackages.prettier
   nodejs_24
