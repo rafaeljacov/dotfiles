@@ -21,7 +21,7 @@ return {
         map('n', '<leader>fg', builtin.live_grep,             { desc = 'Live Grep' })
         map('n', '<leader>fh', builtin.help_tags,             { desc = 'Find Help' })
 
-        map('n', '<leader>sd', builtin.lsp_document_symbols,  { desc = 'Show Document Symbols' })
-        map('n', '<leader>sw', builtin.lsp_workspace_symbols, { desc = 'Show Workspace Symbols' })
+        map('n', '<leader>sd', builtin.lsp_document_symbols,  { desc = 'Find Document Symbols' })
+        map('n', '<leader>sw', builtin.lsp_workspace_symbols, { desc = 'Find Workspace Symbols' })
     end
 }
