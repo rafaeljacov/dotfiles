@@ -32,7 +32,7 @@ vim.cmd([[
 
 -- Hyprlang LSP
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
-    pattern = { "*.hl", "hypr*.conf" },
+    pattern = { "*.hl", "hypr*.conf", "keybinds.conf", "windowrules.conf" },
     callback = function(event)
         vim.lsp.start {
             name = "hyprls",
