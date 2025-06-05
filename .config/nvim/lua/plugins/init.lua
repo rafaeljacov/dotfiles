@@ -8,6 +8,13 @@ return {
     { 'lewis6991/gitsigns.nvim', opts = {} },
     { 'numToStr/Comment.nvim',   opts = {} },
     {
+        "smjonas/inc-rename.nvim",
+        config = function()
+            require("inc_rename").setup({})
+            vim.keymap.set("n", "grn", ":IncRename ")
+        end
+    },
+    {
         "rachartier/tiny-inline-diagnostic.nvim",
         event = "VeryLazy", -- Or `LspAttach`
         priority = 1000,    -- needs to be loaded in first
