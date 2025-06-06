@@ -23,11 +23,6 @@
     wget
     wl-clipboard
     xdg-user-dirs
-    xfce.thunar
-    xfce.thunar-archive-plugin
-    xfce.thunar-media-tags-plugin
-    xfce.thunar-volman
-    xfce.tumbler
     zip
   ];
 }

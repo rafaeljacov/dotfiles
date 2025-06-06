@@ -134,6 +134,18 @@
     pulse.enable = true;
   };
 
+  # File Manager
+  services.tumbler.enable = true;
+  programs.xfconf.enable = true;
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-media-tags-plugin
+      thunar-volman
+    ];
+  };
+
   # adb
   services.udev.packages = [
     pkgs.android-udev-rules
@@ -179,7 +191,7 @@
   ];
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 8081 5000 ];
+  networking.firewall.allowedTCPPorts = [8081 5000];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
