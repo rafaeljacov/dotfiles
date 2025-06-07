@@ -25,6 +25,7 @@ with pkgs; [
   sqlfluff
   typst
   typstyle
+  tinymist
   zed-editor
   zellij
 
