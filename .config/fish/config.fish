@@ -2,7 +2,7 @@ set -g fish_greeting
 
 # abbr ino arduino-cli
 abbr vim nvim
-abbr vid 'neovide &'
+abbr vid 'neovide'
 abbr z zellij
 
 alias  l='eza -lh  --icons=auto' # long list
