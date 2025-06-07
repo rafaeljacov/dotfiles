@@ -24,12 +24,14 @@ return {
             -- Setup lsp's using lspconfig
             lspconfig.lua_ls.setup({}) -- use system installed lua_ls package for NixOS compat
             lspconfig.clangd.setup({})
+            lspconfig.tinymist.setup({})
             lspconfig.nixd.setup(nixd)
 
             -- Setup lsp using mason-lspconfig
             require('mason').setup({})
             require('mason-lspconfig').setup({
                 automatic_installation = false,
+                automatic_enable = true,
                 ensure_installed = {
                     'bashls',
                     'cssls',
@@ -42,7 +44,6 @@ return {
                     'pyright',
                     'tailwindcss',
                     'templ',
-                    'tinymist',
                     'ts_ls',
                 },
                 handlers = {
