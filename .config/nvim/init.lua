@@ -23,13 +23,6 @@ require('lazy').setup({
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-vim.cmd([[
-  augroup HighlightOnYank
-    autocmd!
-    autocmd TextYankPost * lua vim.highlight.on_yank()
-  augroup END
-]])
-
 -- Hyprlang LSP
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
     pattern = { "*.hl", "hypr*.conf", "keybinds.conf", "windowrules.conf" },
