@@ -5,6 +5,7 @@ return {
     'nanotee/zoxide.vim',
     'windwp/nvim-ts-autotag',
     { 'RaafatTurki/hex.nvim',    opts = {} },
+    { 'mvllow/modes.nvim',    opts = {} },
     { 'lewis6991/gitsigns.nvim', opts = {} },
     { 'numToStr/Comment.nvim',   opts = {} },
     {
